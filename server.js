@@ -14,13 +14,14 @@
  */
 
 'use strict';
+const path = require(`path`);
 
 // [START app]
 const express = require('express');
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('Hello from App Engine!');
+app.get('/submit', (req, res) => {
+  res.sendFile(path.join(__dirname, '/views/form.html'));
 });
 
 // Listen to the App Engine-specified port, or 8080 otherwise
