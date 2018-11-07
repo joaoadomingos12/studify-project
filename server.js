@@ -15,13 +15,29 @@
 
 'use strict';
 const path = require(`path`);
+const bodyParser = require('body-parser');
 
 // [START app]
 const express = require('express');
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//DEFINES INDEX
+app.get('/', function(req, res){
+  res.sendFile(path.join(__dirname , '/views/test.html')); //'INDEX'
+});
+
 app.get('/submit', (req, res) => {
-  res.sendFile(path.join(__dirname, '/views/form.html'));
+  res.sendFile(path.join(__dirname, '/views/test.html'));
+});
+
+app.post('/submit', (req, res) => {
+  console.log({
+    name: req.body.name,
+    message: req.body.message
+  });
+  res.send('Thanks for your message!');
 });
 
 // Listen to the App Engine-specified port, or 8080 otherwise
